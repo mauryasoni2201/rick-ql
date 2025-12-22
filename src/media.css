@@ -1,0 +1,30 @@
+@media (max-width: 1200px) {
+    .episodes-card-wrapper,
+    .filters-wrapper.episodes {
+        width: 33.33%;
+    }
+}
+@media (max-width: 1024px) {
+    .character-card-wrapper,
+    .episodes-card-wrapper,
+    .filter-item,
+    .filters-wrapper.episodes {
+        width: 50%;
+    }
+}
+@media (max-width: 767px) {
+    .filters-wrapper.episodes {
+        margin-left: unset;
+        padding: 0px 0px 40px 0px;
+    }
+    .character-card-wrapper,
+    .episodes-card-wrapper,
+    .filter-item,
+    .episode-details .wrapper .item,
+    .filters-wrapper.episodes {
+        width: 100%;
+    }
+    .section-padding {
+        padding: 40px 0px;
+    }
+}

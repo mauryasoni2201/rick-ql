@@ -1,2 +1,0 @@
-# rick-ql
-React.js
