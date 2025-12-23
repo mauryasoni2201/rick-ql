@@ -7,10 +7,12 @@ import Skeleton from 'react-loading-skeleton';
 import Pagination from '../../components/Pagination/Pagination';
 import NoResults from '../../components/NoResults/NoResults';
 import selectOptions from '../../utils/selectOptions';
+import useCharacterFavoriteStore from '../../store/favoritesStore';
 
 const initialPage = 1;
 
 const Home = () => {
+    const { favorites, toggleFavorite } = useCharacterFavoriteStore();
     const [page, setPage] = useState(initialPage);
     const [searchInput, setSearchInput] = useState('');
     const [name, setName] = useState('');
@@ -100,10 +102,15 @@ const Home = () => {
                         onChange={(e) => setSearchInput(e.target.value)}
                     />
                 </div>
+                <div className="w-full py-4 clear-filters">
+                    <button className="btn danger" onClick={resetFilters}>
+                        Reset Filters
+                    </button>
+                </div>
             </div>
             <div className="characters-listing">
                 {loading &&
-                    Array.from({ length: 3 }).map((_, i) => (
+                    Array.from({ length: 4 }).map((_, i) => (
                         <div key={i} className="character-card-wrapper">
                             <Skeleton height={15} count={20} />
                         </div>
@@ -112,6 +119,8 @@ const Home = () => {
                 {!loading &&
                     characters.map((character) => (
                         <CharacterCard
+                            favorites={favorites.includes(character.id)}
+                            toggleFavorite={toggleFavorite}
                             key={character.id}
                             character={character}
                         />

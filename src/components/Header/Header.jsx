@@ -1,62 +1,61 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import NavItem from '../NavItem/NavItem';
 
 const Header = () => {
+    const handleNavClick = () => {
+        window.scrollTo(0, 0);
+    };
+
     return (
         <div className="header-wrap">
             <header className="header">
                 <div className="container">
                     <div className="header-content">
-                        <Link to={'/'} className="logo">
+                        <Link
+                            to="/"
+                            className="logo"
+                            onClick={handleNavClick}
+                            aria-label="homepage-link"
+                        >
                             <img
                                 src="/logo.png"
                                 alt="site-logo"
-                                height={'100'}
-                                width={'100'}
+                                height="100"
+                                width="100"
                             />
                         </Link>
+
                         <div className="links">
                             <nav>
                                 <ul>
                                     <li>
-                                        <NavLink
+                                        <NavItem
                                             to="/"
+                                            label="Home"
                                             end
-                                            className={({ isActive }) =>
-                                                isActive ? 'active' : ''
-                                            }
-                                        >
-                                            Home
-                                        </NavLink>
+                                            onClick={handleNavClick}
+                                        />
                                     </li>
                                     <li>
-                                        <NavLink
+                                        <NavItem
                                             to="/characters"
-                                            className={({ isActive }) =>
-                                                isActive ? 'active' : ''
-                                            }
-                                        >
-                                            Characters
-                                        </NavLink>
+                                            label="Characters"
+                                            onClick={handleNavClick}
+                                        />
                                     </li>
                                     <li>
-                                        <NavLink
+                                        <NavItem
                                             to="/episodes"
-                                            className={({ isActive }) =>
-                                                isActive ? 'active' : ''
-                                            }
-                                        >
-                                            Episodes
-                                        </NavLink>
+                                            label="Episodes"
+                                            onClick={handleNavClick}
+                                        />
                                     </li>
                                     <li>
-                                        <NavLink
-                                            to="/favorites"
-                                            className={({ isActive }) =>
-                                                isActive ? 'active' : ''
-                                            }
-                                        >
-                                            Favorites
-                                        </NavLink>
+                                        <NavItem
+                                            to="/liked-characters"
+                                            label="Liked Characters"
+                                            onClick={handleNavClick}
+                                        />
                                     </li>
                                 </ul>
                             </nav>

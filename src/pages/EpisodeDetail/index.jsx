@@ -6,8 +6,10 @@ import EpisodeInformation from '../../components/EpisodeInformation/EpisodeInfor
 import CharacterCard from '../../components/CharacterCard/CharacterCard';
 import Skeleton from 'react-loading-skeleton';
 import ErrorCard from '../../components/ErrorCard/ErrorCard';
+import useCharacterFavoriteStore from '../../store/favoritesStore';
 
 const EpisodeDetail = () => {
+    const { favorites, toggleFavorite } = useCharacterFavoriteStore();
     const { id } = useParams();
     const navigate = useNavigate();
     const episodeId = Number(id);
@@ -55,6 +57,8 @@ const EpisodeDetail = () => {
 
                         {data.episode.characters.map((character) => (
                             <CharacterCard
+                                favorites={favorites.includes(character.id)}
+                                toggleFavorite={toggleFavorite}
                                 key={character.id}
                                 character={character}
                             />

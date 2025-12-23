@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import useEpisodes from '../../hooks/useEpisodes';
 import SectionLayout from '../../layouts/SectionLayout/SectionLayout';
-import { Link } from 'react-router-dom';
 import Pagination from '../../components/Pagination/Pagination';
 import NoResults from '../../components/NoResults/NoResults';
 import ErrorCard from '../../components/ErrorCard/ErrorCard';
@@ -74,7 +73,7 @@ const Episodes = () => {
 
                 {error && (
                     <ErrorCard
-                        title="Failed to load episodes"
+                        title="Something went wrong! Please try again."
                         buttonOnClick={resetFilters}
                     />
                 )}

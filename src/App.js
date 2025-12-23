@@ -7,7 +7,7 @@ import FullPageLoader from './components/FullPageLoader/FullPageLoader';
 const Home = lazy(() => import('./pages/Home'));
 const Characters = lazy(() => import('./pages/Characters'));
 const CharacterDetail = lazy(() => import('./pages/CharacterDetail'));
-const Favorites = lazy(() => import('./pages/Favorites'));
+const Favorites = lazy(() => import('./pages/LikedCharacters'));
 const Episodes = lazy(() => import('./pages/Episodes'));
 const EpisodeDetail = lazy(() => import('./pages/EpisodeDetail'));
 const LocationDetail = lazy(() => import('./pages/Location'));
@@ -26,17 +26,39 @@ function App() {
             errorElement: <NotFound />,
             children: [
                 { index: true, element: Lazy(Home) },
-                { path: 'characters', element: Lazy(Characters) },
-                { path: 'character/:id', element: Lazy(CharacterDetail) },
-                { path: 'favorites', element: Lazy(Favorites) },
-                { path: 'episodes', element: Lazy(Episodes) },
-                { path: 'episodes/:id', element: Lazy(EpisodeDetail) },
-                { path: 'location/:id', element: Lazy(LocationDetail) },
+                {
+                    path: 'characters',
+                    children: [
+                        {
+                            index: true,
+                            element: Lazy(Characters),
+                        },
+                        {
+                            path: ':id',
+                            element: Lazy(CharacterDetail),
+                        },
+                    ],
+                },
+                {
+                    path: 'episodes',
+                    children: [
+                        { index: true, element: Lazy(Episodes) },
+                        { path: ':id', element: Lazy(EpisodeDetail) },
+                    ],
+                },
+                {
+                    path: 'location',
+                    children: [{ path: ':id', element: Lazy(LocationDetail) }],
+                },
+                {
+                    path: 'liked-characters',
+                    element: Lazy(Favorites),
+                },
                 { path: '*', element: <NotFound /> },
             ],
         },
     ]);
-    return <RouterProvider router={router} />;
+    return <RouterProvider router={router}></RouterProvider>;
 }
 
 export default App;

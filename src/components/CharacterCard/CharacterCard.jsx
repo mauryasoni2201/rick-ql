@@ -1,25 +1,45 @@
 import { Link } from 'react-router-dom';
 
-const CharacterCard = ({ character }) => {
+const CharacterCard = ({
+    character,
+    favorites,
+    toggleFavorite = () => {},
+    removeFavorite = false,
+    handleRemoveFavorite = () => {},
+}) => {
     if (!character) return null;
+
+    const handleToggleFavorite = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        toggleFavorite(character.id);
+    };
 
     return (
         <div className="character-card-wrapper">
             <div className="character-card">
-                <Link to={`/character/${character.id}`} className="image">
+                <Link to={`/characters/${character.id}`} className="image">
                     <img
                         src={character.image}
                         alt={character.name}
                         loading="lazy"
                     />
                     <div className="favorites">
-                        <button className="">demo</button>
+                        <Link
+                            to="#"
+                            onClick={
+                                removeFavorite
+                                    ? handleRemoveFavorite
+                                    : handleToggleFavorite
+                            }
+                            className={`heart ${favorites ? 'active' : ''}`}
+                        ></Link>
                     </div>
                 </Link>
 
                 <div className="content">
                     <h2>
-                        <Link to={`/character/${character.id}`}>
+                        <Link to={`/characters/${character.id}`}>
                             {character.name}
                         </Link>
                     </h2>

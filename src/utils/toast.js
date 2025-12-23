@@ -1,0 +1,20 @@
+import { toast } from 'react-toastify';
+
+const defaultOptions = {
+    position: 'top-right',
+    autoClose: 2000,
+    pauseOnHover: true,
+    closeOnClick: true,
+};
+
+export const showSuccess = (message, options = {}) =>
+    toast.success(message, { ...defaultOptions, ...options });
+
+export const showError = (message, options = {}) =>
+    toast.error(message, { ...defaultOptions, ...options });
+
+export const showInfo = (message, options = {}) =>
+    toast.info(message, { ...defaultOptions, ...options });
+
+export const showWarning = (message, options = {}) =>
+    toast.warn(message, { ...defaultOptions, ...options });
