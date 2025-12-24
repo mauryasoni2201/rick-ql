@@ -1,26 +1,31 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useMemo } from 'react';
 import Skeleton from 'react-loading-skeleton';
-
 import useLocationDetail from '../../hooks/useLocationDetail';
 import SectionLayout from '../../layouts/SectionLayout/SectionLayout';
 import InformationCard from '../../components/InformationCard/InformationCard';
-import ErrorCard from '../../components/ErrorCard/ErrorCard';
 import CharacterCard from '../../components/CharacterCard/CharacterCard';
 import useCharacterFavoriteStore from '../../store/favoritesStore';
+import NoResults from '../../components/NoResults/NoResults';
 
 const LocationDetailPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
     const { favorites, toggleFavorite } = useCharacterFavoriteStore();
-    const { data, loading, error, refetch } = useLocationDetail({ id });
+    const { data, loading, error } = useLocationDetail({ id });
 
     useEffect(() => {
         if (!loading && !error && data && !data.location) {
             navigate('/404', { replace: true });
         }
     }, [loading, error, data, navigate]);
+
+    useEffect(() => {
+        if (error) {
+            navigate('/500', { replace: true });
+        }
+    }, [error, navigate]);
 
     const locationDetails = useMemo(() => {
         if (!data?.location) return [];
@@ -55,15 +60,6 @@ const LocationDetailPage = () => {
                 </div>
             )}
 
-            {error && (
-                <div className="pt-30">
-                    <ErrorCard
-                        title="Something went wrong! Please try again."
-                        buttonOnClick={refetch}
-                    />
-                </div>
-            )}
-
             {!loading && !error && data?.location && (
                 <>
                     <InformationCard data={locationDetails} />
@@ -82,6 +78,11 @@ const LocationDetailPage = () => {
                                 toggleFavorite={toggleFavorite}
                             />
                         ))}
+                        {!loading &&
+                            !error &&
+                            data.location.residents.length === 0 && (
+                                <NoResults />
+                            )}
                     </div>
                 </>
             )}

@@ -3,9 +3,9 @@ import useEpisodes from '../../hooks/useEpisodes';
 import SectionLayout from '../../layouts/SectionLayout/SectionLayout';
 import Pagination from '../../components/Pagination/Pagination';
 import NoResults from '../../components/NoResults/NoResults';
-import ErrorCard from '../../components/ErrorCard/ErrorCard';
 import Skeleton from 'react-loading-skeleton';
 import EpisodeCard from '../../components/EpisodeCard/EpisodeCard';
+import { useNavigate } from 'react-router-dom';
 
 const initialPage = parseInt(process.env.REACT_APP_INITIAL_PAGE, 10) || 1;
 
@@ -13,14 +13,8 @@ const Episodes = () => {
     const [page, setPage] = useState(initialPage);
     const [searchInput, setSearchInput] = useState('');
     const [name, setName] = useState('');
-
+    const navigate = useNavigate();
     const { data, loading, error } = useEpisodes({ name, page });
-
-    const resetFilters = () => {
-        setPage(initialPage);
-        setSearchInput('');
-        setName('');
-    };
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -30,6 +24,12 @@ const Episodes = () => {
 
         return () => clearTimeout(timer);
     }, [searchInput]);
+
+    useEffect(() => {
+        if (error) {
+            navigate('/500', { replace: true });
+        }
+    }, [error, navigate]);
 
     const handlePageClick = (event) => {
         setPage(event.selected + 1);
@@ -70,13 +70,6 @@ const Episodes = () => {
                     ))}
 
                 {!loading && !error && episodes.length === 0 && <NoResults />}
-
-                {error && (
-                    <ErrorCard
-                        title="Something went wrong! Please try again."
-                        buttonOnClick={resetFilters}
-                    />
-                )}
             </div>
 
             {pages > 1 && (

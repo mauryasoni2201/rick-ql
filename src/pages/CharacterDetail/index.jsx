@@ -2,7 +2,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import SectionLayout from '../../layouts/SectionLayout/SectionLayout';
 import useCharacterDetail from '../../hooks/useCharacterDetail';
 import Skeleton from 'react-loading-skeleton';
-import ErrorCard from '../../components/ErrorCard/ErrorCard';
 import InformationCard from '../../components/InformationCard/InformationCard';
 import { useMemo, useEffect } from 'react';
 import Banner from '../../components/Banner/Banner';
@@ -12,13 +11,19 @@ import EpisodeCard from '../../components/EpisodeCard/EpisodeCard';
 const CharacterDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const { data, loading, error, refetch } = useCharacterDetail({ id });
+    const { data, loading, error } = useCharacterDetail({ id });
 
     useEffect(() => {
         if (!loading && !error && data && !data.character) {
             navigate('/404', { replace: true });
         }
     }, [loading, error, data, navigate]);
+
+    useEffect(() => {
+        if (error) {
+            navigate('/500', { replace: true });
+        }
+    }, [error, navigate]);
 
     const characterDetails = useMemo(() => {
         if (!data?.character) return [];
@@ -49,15 +54,6 @@ const CharacterDetail = () => {
             {loading && (
                 <div className="pt-30">
                     <Skeleton count={30} height={10} />
-                </div>
-            )}
-
-            {error && (
-                <div className="pt-30">
-                    <ErrorCard
-                        title="Something went wrong! Please try again."
-                        buttonOnClick={refetch}
-                    />
                 </div>
             )}
 

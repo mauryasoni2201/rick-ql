@@ -196,6 +196,9 @@ input:-ms-input-placeholder {
     padding-top: 80px;
     padding-bottom: 121.5px;
 }
+.section-small .container {
+    max-width: 632px;
+}
 
 /*typography*/
 .h1,

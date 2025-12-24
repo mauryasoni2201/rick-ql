@@ -2,17 +2,18 @@ import { useState, useEffect } from 'react';
 import useCharacters from '../../hooks/useCharacters';
 import SectionLayout from '../../layouts/SectionLayout/SectionLayout';
 import CharacterCard from '../../components/CharacterCard/CharacterCard';
-import ErrorCard from '../../components/ErrorCard/ErrorCard';
 import Skeleton from 'react-loading-skeleton';
 import Pagination from '../../components/Pagination/Pagination';
 import NoResults from '../../components/NoResults/NoResults';
 import selectOptions from '../../utils/selectOptions';
 import useCharacterFavoriteStore from '../../store/favoritesStore';
+import { useNavigate } from 'react-router-dom';
 
 const initialPage = parseInt(process.env.REACT_APP_INITIAL_PAGE, 10) || 1;
 
 const Home = () => {
     const { favorites, toggleFavorite } = useCharacterFavoriteStore();
+    const navigate = useNavigate();
     const [page, setPage] = useState(initialPage);
     const [searchInput, setSearchInput] = useState('');
     const [name, setName] = useState('');
@@ -42,6 +43,12 @@ const Home = () => {
 
         return () => clearTimeout(timer);
     }, [searchInput]);
+
+    useEffect(() => {
+        if (error) {
+            navigate('/500', { replace: true });
+        }
+    }, [error, navigate]);
 
     const handlePageClick = (event) => {
         setPage(event.selected + 1);
@@ -127,13 +134,6 @@ const Home = () => {
                     ))}
 
                 {!loading && !error && characters.length === 0 && <NoResults />}
-
-                {error && (
-                    <ErrorCard
-                        title="Something went wrong! Please try again."
-                        buttonOnClick={resetFilters}
-                    />
-                )}
             </div>
 
             {pages > 1 && (

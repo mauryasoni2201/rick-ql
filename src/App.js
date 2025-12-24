@@ -3,6 +3,7 @@ import { lazy, Suspense } from 'react';
 import RootLayout from './layouts/RootLayout/RootLayout';
 import NotFound from './pages/NotFound';
 import FullPageLoader from './components/FullPageLoader/FullPageLoader';
+import ServerError from './pages/ServerError';
 
 const Home = lazy(() => import('./pages/Home'));
 const Characters = lazy(() => import('./pages/Characters'));
@@ -23,20 +24,13 @@ function App() {
         {
             path: '/',
             element: <RootLayout />,
-            errorElement: <NotFound />,
             children: [
                 { index: true, element: Lazy(Home) },
                 {
                     path: 'characters',
                     children: [
-                        {
-                            index: true,
-                            element: Lazy(Characters),
-                        },
-                        {
-                            path: ':id',
-                            element: Lazy(CharacterDetail),
-                        },
+                        { index: true, element: Lazy(Characters) },
+                        { path: ':id', element: Lazy(CharacterDetail) },
                     ],
                 },
                 {
@@ -46,19 +40,17 @@ function App() {
                         { path: ':id', element: Lazy(EpisodeDetail) },
                     ],
                 },
-                {
-                    path: 'location',
-                    children: [{ path: ':id', element: Lazy(LocationDetail) }],
-                },
-                {
-                    path: 'liked-characters',
-                    element: Lazy(Favorites),
-                },
-                { path: '*', element: <NotFound /> },
+                { path: 'location/:id', element: Lazy(LocationDetail) },
+                { path: 'liked-characters', element: Lazy(Favorites) },
+                { path: '404', element: <NotFound /> },
+                { path: '500', element: <ServerError /> },
             ],
         },
+
+        { path: '*', element: <NotFound /> },
     ]);
-    return <RouterProvider router={router}></RouterProvider>;
+
+    return <RouterProvider router={router} />;
 }
 
 export default App;

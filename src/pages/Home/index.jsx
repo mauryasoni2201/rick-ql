@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import SectionLayout from '../../layouts/SectionLayout/SectionLayout';
 import Banner from '../../components/Banner/Banner';
 import useCharacters from '../../hooks/useCharacters';
@@ -7,24 +7,21 @@ import Skeleton from 'react-loading-skeleton';
 import CharacterCard from '../../components/CharacterCard/CharacterCard';
 import EpisodeCard from '../../components/EpisodeCard/EpisodeCard';
 import NoResults from '../../components/NoResults/NoResults';
-import ErrorCard from '../../components/ErrorCard/ErrorCard';
 import SectionList from '../../components/SectionList/SectionList';
 import useCharacterFavoriteStore from '../../store/favoritesStore';
+import { useNavigate } from 'react-router-dom';
 
 const initialPage = parseInt(process.env.REACT_APP_INITIAL_PAGE, 10) || 1;
 
 const Home = () => {
     const { favorites, toggleFavorite } = useCharacterFavoriteStore();
-    const [page, setPage] = useState(initialPage);
-    const [name, setName] = useState('');
-    const [status, setStatus] = useState('');
-    const [gender, setGender] = useState('');
+    const navigate = useNavigate();
 
     const { data, loading, error } = useCharacters({
-        page,
-        name,
-        status,
-        gender,
+        page: initialPage,
+        name: '',
+        status: '',
+        gender: '',
     });
 
     const {
@@ -33,15 +30,14 @@ const Home = () => {
         error: episodesError,
     } = useEpisodes({ name: '', page: initialPage });
 
-    const resetFilters = () => {
-        setPage(initialPage);
-        setName('');
-        setStatus('');
-        setGender('');
-    };
-
     const characters = data?.characters?.results || [];
     const episodes = episodesData?.episodes?.results || [];
+
+    useEffect(() => {
+        if (error || episodesError) {
+            navigate('/500', { replace: true });
+        }
+    }, [error, navigate, episodesError]);
 
     return (
         <>
@@ -73,12 +69,6 @@ const Home = () => {
                         {!loading && !error && characters.length === 0 && (
                             <NoResults />
                         )}
-                        {error && (
-                            <ErrorCard
-                                title="Something went wrong! Please try again."
-                                buttonOnClick={resetFilters}
-                            />
-                        )}
                     </div>
                 </SectionList>
                 <SectionList title="Episodes" viewAllLink="/episodes">
@@ -99,12 +89,6 @@ const Home = () => {
                         {!episodesLoading &&
                             !episodesError &&
                             episodes.length === 0 && <NoResults />}
-                        {episodesError && (
-                            <ErrorCard
-                                title="Something went wrong! Please try again."
-                                buttonOnClick={resetFilters}
-                            />
-                        )}
                     </div>
                 </SectionList>
             </SectionLayout>

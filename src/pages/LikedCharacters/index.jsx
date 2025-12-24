@@ -3,11 +3,11 @@ import useLikedCharacters from '../../hooks/useFavoriteCharacters';
 import SectionLayout from '../../layouts/SectionLayout/SectionLayout';
 import useCharacterFavoriteStore from '../../store/favoritesStore';
 import CharacterCard from '../../components/CharacterCard/CharacterCard';
-import ErrorCard from '../../components/ErrorCard/ErrorCard';
 import NoResults from '../../components/NoResults/NoResults';
 import Pagination from '../../components/Pagination/Pagination';
 import FullPageLoader from '../../components/FullPageLoader/FullPageLoader';
 import { showSuccess } from '../../utils/toast';
+import { useNavigate } from 'react-router-dom';
 
 const INITIAL_PAGE = parseInt(process.env.REACT_APP_INITIAL_PAGE, 10) || 1;
 const LIMIT = parseInt(process.env.REACT_APP_ITEMS_PER_PAGE, 10) || 20;
@@ -15,6 +15,7 @@ const LIMIT = parseInt(process.env.REACT_APP_ITEMS_PER_PAGE, 10) || 20;
 const LikedCharacters = () => {
     const [page, setPage] = useState(INITIAL_PAGE);
     const { favorites, toggleFavorite } = useCharacterFavoriteStore();
+    const navigate = useNavigate();
 
     const hasFavorites = favorites.length > 0;
 
@@ -23,7 +24,6 @@ const LikedCharacters = () => {
         info,
         error,
         loading,
-        refetch,
     } = useLikedCharacters({
         ids: favorites,
         page,
@@ -58,6 +58,12 @@ const LikedCharacters = () => {
         showSuccess('Removed from your favorites');
     };
 
+    useEffect(() => {
+        if (error) {
+            navigate('/500', { replace: true });
+        }
+    }, [error, navigate]);
+
     return (
         <SectionLayout
             heading="Liked Characters"
@@ -84,13 +90,6 @@ const LikedCharacters = () => {
                 {!loading && !error && !hasFavorites && (
                     <NoResults text="No liked characters found." />
                 )}
-
-                {error && (
-                    <ErrorCard
-                        title="Something went wrong! Please try again."
-                        buttonOnClick={refetch}
-                    />
-                )}
             </div>
 
             {pages > 1 && (
@@ -105,4 +104,5 @@ const LikedCharacters = () => {
         </SectionLayout>
     );
 };
+
 export default LikedCharacters;

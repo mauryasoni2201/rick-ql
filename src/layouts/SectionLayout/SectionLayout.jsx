@@ -5,9 +5,10 @@ const SectionLayout = ({
     descriptionClasses = '',
     children,
     withoutHeadingAndDescription = false,
+    sectionClasses = '',
 }) => {
     return (
-        <section className="section-padding">
+        <section className={`section-padding ${sectionClasses}`}>
             <div className="container">
                 {!withoutHeadingAndDescription && (
                     <>

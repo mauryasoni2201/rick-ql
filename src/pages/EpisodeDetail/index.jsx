@@ -5,7 +5,6 @@ import SectionLayout from '../../layouts/SectionLayout/SectionLayout';
 import InformationCard from '../../components/InformationCard/InformationCard';
 import CharacterCard from '../../components/CharacterCard/CharacterCard';
 import Skeleton from 'react-loading-skeleton';
-import ErrorCard from '../../components/ErrorCard/ErrorCard';
 import useCharacterFavoriteStore from '../../store/favoritesStore';
 
 const EpisodeDetail = () => {
@@ -14,7 +13,7 @@ const EpisodeDetail = () => {
     const navigate = useNavigate();
     const episodeId = Number(id);
 
-    const { data, error, loading, refetch } = useEpisodeDetail({
+    const { data, error, loading } = useEpisodeDetail({
         id: episodeId,
     });
 
@@ -23,6 +22,12 @@ const EpisodeDetail = () => {
             navigate('/404', { replace: true });
         }
     }, [loading, error, data, navigate]);
+
+    useEffect(() => {
+        if (error) {
+            navigate('/500', { replace: true });
+        }
+    }, [error, navigate]);
 
     const episodeDetails = useMemo(() => {
         if (!data?.episode) return [];
@@ -54,15 +59,6 @@ const EpisodeDetail = () => {
             {loading && (
                 <div className="pt-30">
                     <Skeleton count={30} height={10} />
-                </div>
-            )}
-
-            {error && (
-                <div className="pt-30">
-                    <ErrorCard
-                        title="Something went wrong! Please try again."
-                        buttonOnClick={refetch}
-                    />
                 </div>
             )}
 
