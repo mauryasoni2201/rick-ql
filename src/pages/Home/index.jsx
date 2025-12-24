@@ -11,7 +11,7 @@ import ErrorCard from '../../components/ErrorCard/ErrorCard';
 import SectionList from '../../components/SectionList/SectionList';
 import useCharacterFavoriteStore from '../../store/favoritesStore';
 
-const initialPage = 1;
+const initialPage = parseInt(process.env.REACT_APP_INITIAL_PAGE, 10) || 1;
 
 const Home = () => {
     const { favorites, toggleFavorite } = useCharacterFavoriteStore();

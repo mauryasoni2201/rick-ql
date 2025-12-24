@@ -9,7 +9,7 @@ import NoResults from '../../components/NoResults/NoResults';
 import selectOptions from '../../utils/selectOptions';
 import useCharacterFavoriteStore from '../../store/favoritesStore';
 
-const initialPage = 1;
+const initialPage = parseInt(process.env.REACT_APP_INITIAL_PAGE, 10) || 1;
 
 const Home = () => {
     const { favorites, toggleFavorite } = useCharacterFavoriteStore();
@@ -38,7 +38,7 @@ const Home = () => {
         const timer = setTimeout(() => {
             setName(searchInput.toLowerCase().trim());
             setPage(initialPage);
-        }, 500);
+        }, process.env.REACT_APP_DEBOUNCE_DELAY || 1000);
 
         return () => clearTimeout(timer);
     }, [searchInput]);

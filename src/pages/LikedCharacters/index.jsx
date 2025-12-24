@@ -9,8 +9,8 @@ import Pagination from '../../components/Pagination/Pagination';
 import FullPageLoader from '../../components/FullPageLoader/FullPageLoader';
 import { showSuccess } from '../../utils/toast';
 
-const INITIAL_PAGE = 1;
-const LIMIT = 20;
+const INITIAL_PAGE = parseInt(process.env.REACT_APP_INITIAL_PAGE, 10) || 1;
+const LIMIT = parseInt(process.env.REACT_APP_ITEMS_PER_PAGE, 10) || 20;
 
 const LikedCharacters = () => {
     const [page, setPage] = useState(INITIAL_PAGE);
@@ -33,14 +33,12 @@ const LikedCharacters = () => {
 
     const pages = info?.pages ?? 0;
 
-    /* Keep page always valid when data changes */
     useEffect(() => {
         if (pages > 0 && page > pages) {
             setPage(pages);
         }
     }, [pages, page]);
 
-    /* Reset page when favorites list changes */
     useEffect(() => {
         setPage(INITIAL_PAGE);
     }, [favorites]);

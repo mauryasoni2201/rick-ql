@@ -1,33 +1,31 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useMemo } from 'react';
-import useEpisodeDetail from '../../hooks/useEpisodeDetail';
+import Skeleton from 'react-loading-skeleton';
+
+import useLocationDetail from '../../hooks/useLocationDetail';
 import SectionLayout from '../../layouts/SectionLayout/SectionLayout';
 import InformationCard from '../../components/InformationCard/InformationCard';
-import CharacterCard from '../../components/CharacterCard/CharacterCard';
-import Skeleton from 'react-loading-skeleton';
 import ErrorCard from '../../components/ErrorCard/ErrorCard';
+import CharacterCard from '../../components/CharacterCard/CharacterCard';
 import useCharacterFavoriteStore from '../../store/favoritesStore';
 
-const EpisodeDetail = () => {
-    const { favorites, toggleFavorite } = useCharacterFavoriteStore();
+const LocationDetailPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const episodeId = Number(id);
 
-    const { data, error, loading, refetch } = useEpisodeDetail({
-        id: episodeId,
-    });
+    const { favorites, toggleFavorite } = useCharacterFavoriteStore();
+    const { data, loading, error, refetch } = useLocationDetail({ id });
 
     useEffect(() => {
-        if (!loading && !error && data && !data.episode) {
+        if (!loading && !error && data && !data.location) {
             navigate('/404', { replace: true });
         }
     }, [loading, error, data, navigate]);
 
-    const episodeDetails = useMemo(() => {
-        if (!data?.episode) return [];
+    const locationDetails = useMemo(() => {
+        if (!data?.location) return [];
 
-        const createdAt = new Date(data.episode.created).toLocaleDateString(
+        const createdAt = new Date(data.location.created).toLocaleDateString(
             'en-US',
             {
                 year: 'numeric',
@@ -37,18 +35,18 @@ const EpisodeDetail = () => {
         );
 
         return [
-            { label: 'Episode Number', value: data.episode.episode },
-            { label: 'Episode Name', value: data.episode.name },
-            { label: 'Live Date', value: data.episode.air_date },
+            { label: 'Location Name', value: data.location.name },
+            { label: 'Type', value: data.location.type },
+            { label: 'Dimension', value: data.location.dimension },
             { label: 'Created At', value: createdAt },
         ];
     }, [data]);
 
     return (
         <SectionLayout
-            headingClasses="text-center"
-            heading="Episode Details"
-            description="Explore the full information about this episode."
+            heading="Location Detail"
+            headingClasses="text-center pb-10"
+            description="Explore the details of this location."
             descriptionClasses="text-center"
         >
             {loading && (
@@ -66,16 +64,17 @@ const EpisodeDetail = () => {
                 </div>
             )}
 
-            {!loading && !error && data?.episode && (
+            {!loading && !error && data?.location && (
                 <>
-                    <InformationCard data={episodeDetails} />
+                    <InformationCard data={locationDetails} />
 
                     <div className="characters-listing pt-30">
                         <h4 className="text-center w-full py-4 pt-30">
-                            The following characters appeared in this episode.
+                            The following characters were last seen at this
+                            location.
                         </h4>
 
-                        {data.episode.characters.map((character) => (
+                        {data.location.residents.map((character) => (
                             <CharacterCard
                                 key={character.id}
                                 character={character}
@@ -89,4 +88,4 @@ const EpisodeDetail = () => {
         </SectionLayout>
     );
 };
-export default EpisodeDetail;
+export default LocationDetailPage;

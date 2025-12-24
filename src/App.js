@@ -10,7 +10,7 @@ const CharacterDetail = lazy(() => import('./pages/CharacterDetail'));
 const Favorites = lazy(() => import('./pages/LikedCharacters'));
 const Episodes = lazy(() => import('./pages/Episodes'));
 const EpisodeDetail = lazy(() => import('./pages/EpisodeDetail'));
-const LocationDetail = lazy(() => import('./pages/Location'));
+const LocationDetail = lazy(() => import('./pages/LocationDetail'));
 
 const Lazy = (Component) => (
     <Suspense fallback={<FullPageLoader />}>

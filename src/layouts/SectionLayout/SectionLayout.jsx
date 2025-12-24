@@ -18,9 +18,7 @@ const SectionLayout = ({
                         )}
 
                         {description && (
-                            <p
-                                className={`text-base text-gray-600 ${descriptionClasses}`}
-                            >
+                            <p className={`p ${descriptionClasses}`}>
                                 {description}
                             </p>
                         )}

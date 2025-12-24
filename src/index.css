@@ -173,10 +173,28 @@ input:-ms-input-placeholder {
     padding: 0 16px;
     margin: 0 auto;
 }
-
+.character-detail {
+    display: flex;
+    flex-wrap: wrap;
+}
+.character-detail .hero-banner {
+    width: 35%;
+}
+.character-detail .hero-banner img {
+    border-radius: 12px 0px 0px 12px;
+}
+.character-detail .information-card {
+    width: 65%;
+    display: flex;
+    align-items: center;
+    border-radius: 0px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
 /*section-spacing*/
 .section-padding {
-    padding: 80px 0px;
+    padding-top: 80px;
+    padding-bottom: 121.5px;
 }
 
 /*typography*/
@@ -242,6 +260,9 @@ p {
     font-weight: 400;
     margin: 0;
     padding: 0;
+}
+div.m-0 {
+    margin: 0;
 }
 
 /*loader*/
@@ -555,8 +576,8 @@ p {
     justify-content: center;
     align-items: center;
     background-color: var(--white-color);
-    padding: 6px 10px;
-    font-size: 24px;
+    padding: 5px;
+    font-size: 25px;
     border: none;
     cursor: pointer;
     color: var(--primary-color);
@@ -705,33 +726,41 @@ p {
 }
 
 /*episode details*/
-.episode-details {
+.information-card {
     padding: 30px;
     background-color: var(--grey-color);
     margin-top: 40px;
     border-radius: 12px;
 }
-.episode-details .wrapper {
+.information-card .wrapper {
     display: flex;
     margin: 0px -16px;
     flex-wrap: wrap;
     row-gap: 32px;
 }
-.episode-details .wrapper .item {
+.information-card .wrapper .item {
     padding: 0px 16px;
     width: 50%;
 }
-.episode-details .wrap-item h2 {
+.information-card .wrap-item h2 {
     line-height: 1;
     padding-bottom: 10px;
+    text-transform: capitalize;
 }
-.episode-details .wrap-item h2 b {
+.information-card .wrap-item h2 b {
     font-size: 20px;
     font-weight: 600;
 }
-.episode-details .wrap-item h3 {
+.information-card .wrap-item h3 {
     font-size: 18px;
     font-weight: 500;
+    text-transform: capitalize;
+}
+.information-card .wrap-item .link {
+    transition: var(--transition);
+}
+.information-card .wrap-item .link:hover {
+    color: var(--primary-color);
 }
 
 .section-header {

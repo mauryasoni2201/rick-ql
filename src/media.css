@@ -18,7 +18,14 @@
     .clear-filters .btn {
         width: 100%;
     }
+    .character-detail .hero-banner {
+        width: 50%;
+    }
+    .character-detail .information-card {
+        width: 50%;
+    }
 }
+
 @media (max-width: 767px) {
     .filters-wrapper.episodes {
         margin-left: unset;
@@ -42,6 +49,19 @@
     }
     .section-header .btn {
         display: block;
+        width: 100%;
+    }
+    .character-detail .hero-banner {
+        width: 100%;
+    }
+    .character-detail .hero-banner img,
+    .character-detail .information-card {
+        border-radius: 0px;
+    }
+    .character-detail .information-card {
+        width: 100%;
+    }
+    .information-card .wrapper .item {
         width: 100%;
     }
 }

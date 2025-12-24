@@ -7,7 +7,7 @@ import ErrorCard from '../../components/ErrorCard/ErrorCard';
 import Skeleton from 'react-loading-skeleton';
 import EpisodeCard from '../../components/EpisodeCard/EpisodeCard';
 
-const initialPage = 1;
+const initialPage = parseInt(process.env.REACT_APP_INITIAL_PAGE, 10) || 1;
 
 const Episodes = () => {
     const [page, setPage] = useState(initialPage);
@@ -26,7 +26,7 @@ const Episodes = () => {
         const timer = setTimeout(() => {
             setName(searchInput.toLowerCase().trim());
             setPage(initialPage);
-        }, 500);
+        }, process.env.REACT_APP_DEBOUNCE_DELAY || 1000);
 
         return () => clearTimeout(timer);
     }, [searchInput]);
