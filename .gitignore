@@ -58,4 +58,3 @@ pnpm-debug.log*
 # Misc
 # =========================
 *.tgz
-package-lock.json
