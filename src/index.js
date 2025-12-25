@@ -1,10 +1,10 @@
 import ReactDOM from 'react-dom/client';
-import 'react-loading-skeleton/dist/skeleton.css';
-import './index.css';
-import './media.css';
 import App from './App';
 import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client/react';
+import 'react-loading-skeleton/dist/skeleton.css';
+import './index.css';
+import './media.css';
 
 const client = new ApolloClient({
     link: new HttpLink({

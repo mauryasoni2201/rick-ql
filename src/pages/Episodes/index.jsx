@@ -7,7 +7,7 @@ import Skeleton from 'react-loading-skeleton';
 import EpisodeCard from '../../components/EpisodeCard/EpisodeCard';
 import { useNavigate } from 'react-router-dom';
 
-const initialPage = parseInt(process.env.REACT_APP_INITIAL_PAGE, 10) || 1;
+const initialPage = 1;
 
 const Episodes = () => {
     const [page, setPage] = useState(initialPage);
@@ -20,7 +20,7 @@ const Episodes = () => {
         const timer = setTimeout(() => {
             setName(searchInput.toLowerCase().trim());
             setPage(initialPage);
-        }, process.env.REACT_APP_DEBOUNCE_DELAY || 1000);
+        }, 500);
 
         return () => clearTimeout(timer);
     }, [searchInput]);

@@ -784,7 +784,7 @@ div.m-0 {
     background-color: var(--secondary-color);
     width: 100%;
     bottom: 0px;
-    z-index: 12;
+    z-index: 10;
 }
 .footer-content {
     display: flex;

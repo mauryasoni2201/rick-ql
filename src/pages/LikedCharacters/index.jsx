@@ -9,8 +9,8 @@ import FullPageLoader from '../../components/FullPageLoader/FullPageLoader';
 import { showSuccess } from '../../utils/toast';
 import { useNavigate } from 'react-router-dom';
 
-const INITIAL_PAGE = parseInt(process.env.REACT_APP_INITIAL_PAGE, 10) || 1;
-const LIMIT = parseInt(process.env.REACT_APP_ITEMS_PER_PAGE, 10) || 20;
+const INITIAL_PAGE = 1;
+const LIMIT = 20;
 
 const LikedCharacters = () => {
     const [page, setPage] = useState(INITIAL_PAGE);

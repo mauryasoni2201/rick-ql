@@ -9,7 +9,7 @@ import selectOptions from '../../utils/selectOptions';
 import useCharacterFavoriteStore from '../../store/favoritesStore';
 import { useNavigate } from 'react-router-dom';
 
-const initialPage = parseInt(process.env.REACT_APP_INITIAL_PAGE, 10) || 1;
+const initialPage = 1;
 
 const Home = () => {
     const { favorites, toggleFavorite } = useCharacterFavoriteStore();
@@ -39,7 +39,7 @@ const Home = () => {
         const timer = setTimeout(() => {
             setName(searchInput.toLowerCase().trim());
             setPage(initialPage);
-        }, process.env.REACT_APP_DEBOUNCE_DELAY || 1000);
+        }, 500);
 
         return () => clearTimeout(timer);
     }, [searchInput]);
