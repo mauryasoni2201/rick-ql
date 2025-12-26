@@ -7,6 +7,7 @@ import InformationCard from '../../components/InformationCard/InformationCard';
 import CharacterCard from '../../components/CharacterCard/CharacterCard';
 import useCharacterFavoriteStore from '../../store/favoritesStore';
 import NoResults from '../../components/NoResults/NoResults';
+import CommonHead from '../../components/CommonHead/CommonHead';
 
 const LocationDetailPage = () => {
     const { id } = useParams();
@@ -47,7 +48,19 @@ const LocationDetailPage = () => {
         ];
     }, [data]);
 
+    const metaData = {
+        title: 'RickQL - Location Detail',
+        description: 'Explore the details of this location.',
+        keywords: 'Rick and Morty, RickQL, GraphQL, Rick and Morty API',
+        og:{
+            title: 'RickQL - Location Detail',
+            description: 'Explore the details of this location.',
+            image: '/banner-image.png',
+        }
+    }
     return (
+        <>
+        <CommonHead metaData={metaData}/>
         <SectionLayout
             heading="Location Detail"
             headingClasses="text-center pb-10"
@@ -87,6 +100,7 @@ const LocationDetailPage = () => {
                 </>
             )}
         </SectionLayout>
+        </>
     );
 };
 export default LocationDetailPage;

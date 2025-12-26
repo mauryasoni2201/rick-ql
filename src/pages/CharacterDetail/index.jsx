@@ -7,6 +7,7 @@ import { useMemo, useEffect } from 'react';
 import Banner from '../../components/Banner/Banner';
 import NoResults from '../../components/NoResults/NoResults';
 import EpisodeCard from '../../components/EpisodeCard/EpisodeCard';
+import CommonHead from '../../components/CommonHead/CommonHead';
 
 const CharacterDetail = () => {
     const { id } = useParams();
@@ -44,7 +45,20 @@ const CharacterDetail = () => {
         ];
     }, [data]);
 
+    const metaData = {
+        title: 'RickQL - Character Detail',
+        description: 'Explore the details of character.',
+        keywords: 'Rick and Morty, RickQL, GraphQL, Rick and Morty API',
+        og:{
+            title: 'RickQL - Character Detail',
+            description: 'Explore the details of character.',
+            image: '/banner-image.png',
+        }
+    };
+
     return (
+        <>
+            <CommonHead metaData={metaData} />
         <SectionLayout
             heading="Character details"
             headingClasses="text-center pb-10"
@@ -78,7 +92,7 @@ const CharacterDetail = () => {
                 </div>
             )}
         </SectionLayout>
+        </>
     );
 };
-
 export default CharacterDetail;

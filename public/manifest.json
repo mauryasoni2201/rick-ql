@@ -1,7 +1,7 @@
 {
   "short_name": "RickQL",
-  "name": "RickQL",
-  "description": "Explore the ultimate Rick and Morty universe database. Search characters, browse episodes, discover locations.",
+  "name": "Rick & Morty GraphQL Explorer",
+  "description": "Explore the ultimate Rick and Morty universe database. Search characters, browse episodes, discover locations, and dive into the multiverse. Powered by GraphQL for blazing-fast data fetching.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,40 +10,38 @@
       "purpose": "any"
     },
     {
-      "src": "logo192.png",
+      "src": "logo.png",
       "type": "image/png",
-      "sizes": "192x192",
+      "sizes": "512x512",
       "purpose": "any"
     },
     {
-      "src": "logo512.png",
+      "src": "logo-without-bg.png",
       "type": "image/png",
       "sizes": "512x512",
-      "purpose": "any maskable"
+      "purpose": "maskable"
     }
   ],
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "orientation": "portrait-primary",
-  "theme_color": "#000000",
-  "background_color": "#ffffff",
-  "screenshots": [
-    {
-      "src": "screenshot-small.png",
-      "sizes": "540x720",
-      "type": "image/png",
-      "form_factor": "narrow"
-    },
-    {
-      "src": "screenshot-large.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide"
-    }
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
   ],
-  "categories": ["entertainment", "reference"],
+  "orientation": "any",
+  "theme_color": "#11b0c8",
+  "background_color": "#0a0e27",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": [
+    "entertainment",
+    "reference",
+    "education"
+  ],
   "prefer_related_applications": false,
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
   "shortcuts": [
     {
       "name": "Browse Characters",
@@ -52,8 +50,8 @@
       "url": "/characters",
       "icons": [
         {
-          "src": "logo192.png",
-          "sizes": "192x192",
+          "src": "logo.png",
+          "sizes": "512x512",
           "type": "image/png"
         }
       ]
@@ -65,8 +63,8 @@
       "url": "/episodes",
       "icons": [
         {
-          "src": "logo192.png",
-          "sizes": "192x192",
+          "src": "logo.png",
+          "sizes": "512x512",
           "type": "image/png"
         }
       ]
@@ -74,15 +72,29 @@
     {
       "name": "My Favorites",
       "short_name": "Favorites",
-      "description": "View your favorite characters and episodes",
-      "url": "/favorites",
+      "description": "View your favorite characters",
+      "url": "/liked-characters",
       "icons": [
         {
-          "src": "logo192.png",
-          "sizes": "192x192",
+          "src": "logo.png",
+          "sizes": "512x512",
           "type": "image/png"
         }
       ]
     }
-  ]
+  ],
+  "screenshots": [
+    {
+      "src": "banner-image.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Rick & Morty Explorer home screen"
+    }
+  ],
+  "related_applications": [],
+  "protocol_handlers": [],
+  "note_taking": {
+    "new_note_url": "/characters"
+  }
 }

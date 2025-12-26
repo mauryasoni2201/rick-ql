@@ -23,7 +23,6 @@ const Header = () => {
             <header className="header">
                 <div className="container">
                     <div className="header-content">
-                        {/* Logo */}
                         <Link
                             to="/"
                             className="logo"
@@ -37,8 +36,6 @@ const Header = () => {
                                 width="100"
                             />
                         </Link>
-
-                        {/* Open Menu Button */}
                         <div className="open-button">
                             <button
                                 onClick={handleOpenButton}
@@ -73,8 +70,6 @@ const Header = () => {
                                 </svg>
                             </button>
                         </div>
-
-                        {/* Menu Links */}
                         <div
                             className={`links ${
                                 open ? 'open open-menu' : 'close-menu'
@@ -107,7 +102,6 @@ const Header = () => {
                                     </svg>
                                 </button>
                             </div>
-
                             <nav>
                                 <ul>
                                     <li>

@@ -789,7 +789,6 @@ div.m-0 {
 .footer-content {
     display: flex;
     justify-content: center;
-    column-gap: 10px;
 }
 .footer-content p.footer-text {
     display: flex;

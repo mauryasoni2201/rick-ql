@@ -8,6 +8,7 @@ import NoResults from '../../components/NoResults/NoResults';
 import selectOptions from '../../utils/selectOptions';
 import useCharacterFavoriteStore from '../../store/favoritesStore';
 import { useNavigate } from 'react-router-dom';
+import CommonHead from '../../components/CommonHead/CommonHead';
 
 const initialPage = 1;
 
@@ -57,8 +58,21 @@ const Home = () => {
 
     const characters = data?.characters?.results || [];
     const pages = data?.characters?.info?.pages || 0;
+    
+    const metaData ={
+        title: 'RickQL - Characters',
+        description: 'Explore the characters from the Ricky & Morty show',
+        keywords: 'Rick and Morty, RickQL, GraphQL, Rick and Morty API',
+        og:{
+            title: 'RickQL - Characters',
+            description: 'Explore the characters from the Ricky & Morty show',
+            image: '/banner-image.png',
+        }
+    };
 
     return (
+        <>
+            <CommonHead metaData={metaData} />
         <SectionLayout
             headingClasses="text-center pb-10"
             heading="Ricky & Morty Characters"
@@ -146,7 +160,7 @@ const Home = () => {
                 </div>
             )}
         </SectionLayout>
+        </>
     );
 };
-
 export default Home;

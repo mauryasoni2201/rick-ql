@@ -1,3 +1,33 @@
 # https://www.robotstxt.org/robotstxt.html
+# Rick & Morty GraphQL Explorer - Robots.txt
+
+# Allow all search engines
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /404
+Disallow: /500
+
+# Allow specific paths for better indexing
+Allow: /characters
+Allow: /episodes
+Allow: /location
+Allow: /liked-characters
+
+# Crawl delay (polite crawling)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: /sitemap.xml
+
+# Specific bot configurations
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /

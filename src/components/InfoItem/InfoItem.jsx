@@ -6,16 +6,16 @@ const InfoItem = ({ label = '', value = '', link = false }) => (
             <b>{label}:</b>
         </h2>
         <h3>
-            {link ? (
+            {link && value !== 'unknown' ? (
                 <Link
                     className="link"
                     to={link}
                     onClick={() => window.scrollTo(0, 0)}
                 >
-                    {value || '-'}
+                    {value}
                 </Link>
             ) : (
-                value || '-'
+                <span>{value}</span>
             )}
         </h3>
     </div>

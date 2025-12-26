@@ -8,6 +8,7 @@ import Pagination from '../../components/Pagination/Pagination';
 import FullPageLoader from '../../components/FullPageLoader/FullPageLoader';
 import { showSuccess } from '../../utils/toast';
 import { useNavigate } from 'react-router-dom';
+import CommonHead from '../../components/CommonHead/CommonHead';
 
 const INITIAL_PAGE = 1;
 const LIMIT = 20;
@@ -64,7 +65,19 @@ const LikedCharacters = () => {
         }
     }, [error, navigate]);
 
+    const metaData = {
+        title: 'RickQL - Liked Characters',
+        description: 'Your favorite characters from the Rick and Morty universe',
+        keywords: 'Rick and Morty, RickQL, GraphQL, Rick and Morty API',
+        og:{
+            title: 'RickQL - Liked Characters',
+            description: 'Your favorite characters from the Rick and Morty universe',
+            image: '/banner-image.png',
+        }
+    };
     return (
+        <>
+            <CommonHead metaData={metaData} />
         <SectionLayout
             heading="Liked Characters"
             headingClasses="text-center pb-10"
@@ -102,6 +115,7 @@ const LikedCharacters = () => {
                 </div>
             )}
         </SectionLayout>
+        </>
     );
 };
 

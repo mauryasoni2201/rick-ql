@@ -150,4 +150,71 @@
     .information-card .wrapper .item {
         width: 100%;
     }
+    .h1,
+    h1 {
+        font-size: 33px;
+    }
+    .h2,
+    h2 {
+        font-size: 30px;
+    }
+    .h3,
+    h3 {
+        font-size: 28px;
+    }
+    .h4,
+    h4 {
+        font-size: 25px;
+    }
+    .h5,
+    h5 {
+        font-size: 20px;
+        line-height: 1.5;
+        color: var(--black-color);
+        font-weight: 700;
+        margin: 0;
+        padding: 0;
+    }
+    .h6,
+    h6 {
+        font-size: 18px;
+    }
+    .btn {
+        padding: 10px 12px;
+    }
+    .header-content .links ul a,
+    .btn,
+    .p,
+    p {
+        font-size: 15px;
+    }
+    .btn,
+    .header-content .links ul a {
+        letter-spacing: 1px;
+    }
+    .character-card .content h2 {
+        font-size: 22px;
+    }
+    .episode-card h2 {
+        font-size: 16px;
+    }
+    .episode-card p {
+        font-size: 14px;
+    }
+    .form-select,
+    .form-control {
+        height: 40px;
+        padding: 10px 15px;
+        font-size: 15px;
+    }
+    .information-card .wrap-item h2 b {
+        font-size: 18px;
+    }
+    .information-card .wrap-item h3,
+    .not-found-wrapper p {
+        font-size: 16px;
+    }
+    .footer-content p.footer-text {
+        font-size: 14px;
+    }
 }

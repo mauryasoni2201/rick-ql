@@ -10,6 +10,7 @@ import NoResults from '../../components/NoResults/NoResults';
 import SectionList from '../../components/SectionList/SectionList';
 import useCharacterFavoriteStore from '../../store/favoritesStore';
 import { useNavigate } from 'react-router-dom';
+import CommonHead from '../../components/CommonHead/CommonHead';
 
 const initialPage = 1;
 
@@ -39,8 +40,19 @@ const Home = () => {
         }
     }, [error, navigate, episodesError]);
 
+    const metaData = {
+        title: 'RickQL - Home',
+        description: 'Dive into the Rick and Morty universe with RickQL. Explore detailed character profiles, episode guides, and all the information you need in one place.',
+        keywords: 'Rick and Morty, RickQL, GraphQL, Rick and Morty API',
+        og:{
+            title: 'RickQL - Home',
+            description: 'Dive into the Rick and Morty universe with RickQL. Explore detailed character profiles, episode guides, and all the information you need in one place.',
+            image: '/banner-image.png',
+        }
+    };
     return (
         <>
+            <CommonHead metaData={metaData} />
             <Banner src={'/banner-image.png'} />
             <SectionLayout
                 heading="Welcome to RickQL"

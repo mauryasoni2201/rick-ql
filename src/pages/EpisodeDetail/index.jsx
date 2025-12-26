@@ -6,6 +6,7 @@ import InformationCard from '../../components/InformationCard/InformationCard';
 import CharacterCard from '../../components/CharacterCard/CharacterCard';
 import Skeleton from 'react-loading-skeleton';
 import useCharacterFavoriteStore from '../../store/favoritesStore';
+import CommonHead from '../../components/CommonHead/CommonHead';
 
 const EpisodeDetail = () => {
     const { favorites, toggleFavorite } = useCharacterFavoriteStore();
@@ -49,7 +50,19 @@ const EpisodeDetail = () => {
         ];
     }, [data]);
 
+    const metaData = {
+        title: 'RickQL - Episode Detail',
+        description: 'Explore the details of this episode.',
+        keywords: 'Rick and Morty, RickQL, GraphQL, Rick and Morty API',
+        og:{
+            title: 'RickQL - Episode Detail',
+            description: 'Explore the details of this episode.',
+            image: '/banner-image.png',
+        }
+    }
     return (
+        <>
+        <CommonHead metaData={metaData}/>
         <SectionLayout
             headingClasses="text-center"
             heading="Episode Details"
@@ -83,6 +96,7 @@ const EpisodeDetail = () => {
                 </>
             )}
         </SectionLayout>
+        </>
     );
 };
 export default EpisodeDetail;

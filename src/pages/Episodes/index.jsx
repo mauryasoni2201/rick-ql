@@ -6,6 +6,7 @@ import NoResults from '../../components/NoResults/NoResults';
 import Skeleton from 'react-loading-skeleton';
 import EpisodeCard from '../../components/EpisodeCard/EpisodeCard';
 import { useNavigate } from 'react-router-dom';
+import CommonHead from '../../components/CommonHead/CommonHead';
 
 const initialPage = 1;
 
@@ -39,7 +40,20 @@ const Episodes = () => {
     const episodes = data?.episodes?.results || [];
     const pages = data?.episodes?.info?.pages || 0;
 
+    const metaData = {
+        title: 'RickQL - Episodes',
+        description: 'Explore the episodes from the Ricky & Morty show',
+        keywords: 'Rick and Morty, RickQL, GraphQL, Rick and Morty API',
+        og:{
+            title: 'RickQL - Episodes',
+            description: 'Explore the episodes from the Ricky & Morty show',
+            image: '/banner-image.png',
+        }
+    }
+
     return (
+        <>
+        <CommonHead metaData={metaData}/>
         <SectionLayout
             headingClasses="text-center pb-10"
             heading="Ricky & Morty Episodes"
@@ -82,6 +96,7 @@ const Episodes = () => {
                 </div>
             )}
         </SectionLayout>
+        </>
     );
 };
 export default Episodes;

@@ -77,7 +77,7 @@ const CharacterCard = ({
                             {character?.location?.id ? (
                                 <Link
                                     to={`/location/${character.location.id}`}
-                                    onClick={scrollTop}
+                                    onClick={scrollTop  }
                                 >
                                     {character.location.name}
                                 </Link>

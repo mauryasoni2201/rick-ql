@@ -23,5 +23,4 @@ const Pagination = ({ pageCount, onPageChange, forcePage }) => {
         />
     );
 };
-
 export default Pagination;
