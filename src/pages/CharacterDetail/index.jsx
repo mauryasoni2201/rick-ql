@@ -49,50 +49,54 @@ const CharacterDetail = () => {
         title: 'RickQL - Character Detail',
         description: 'Explore the details of character.',
         keywords: 'Rick and Morty, RickQL, GraphQL, Rick and Morty API',
-        og:{
+        og: {
             title: 'RickQL - Character Detail',
             description: 'Explore the details of character.',
-            image: '/banner-image.png',
-        }
+        },
     };
-
     return (
         <>
             <CommonHead metaData={metaData} />
-        <SectionLayout
-            heading="Character details"
-            headingClasses="text-center pb-10"
-            description="Explore the details of character."
-            descriptionClasses="text-center"
-        >
-            {loading && (
-                <div className="pt-30">
-                    <Skeleton count={30} height={10} />
-                </div>
-            )}
+            <SectionLayout
+                heading="Character details"
+                headingClasses="text-center pb-10"
+                description="Explore the details of character."
+                descriptionClasses="text-center"
+            >
+                {loading && (
+                    <div className="pt-30">
+                        <Skeleton count={30} height={10} />
+                    </div>
+                )}
 
-            {!loading && !error && data?.character && (
-                <div>
-                    <div className="character-detail pt-30">
-                        <Banner src={data?.character?.image} />
-                        <InformationCard
-                            className={'m-0'}
-                            data={characterDetails}
-                        />
+                {!loading && !error && data?.character && (
+                    <div>
+                        <div className="character-detail pt-30">
+                            <Banner src={data?.character?.image} />
+                            <InformationCard
+                                className={'m-0'}
+                                data={characterDetails}
+                            />
+                        </div>
+                        <div className="h4 pt-30 pb-30 text-center">
+                            Character appeared in these much episodes
+                        </div>
+                        <div className="episodes-listing">
+                            {data?.character.episode?.map((episode) => (
+                                <EpisodeCard
+                                    episode={episode}
+                                    key={episode?.id}
+                                />
+                            ))}
+                            {data?.character.episode?.length === 0 && (
+                                <NoResults />
+                            )}
+                        </div>
                     </div>
-                    <div className="h4 pt-30 pb-30 text-center">
-                        Character appeared in these much episodes
-                    </div>
-                    <div className="episodes-listing">
-                        {data?.character.episode?.map((episode) => (
-                            <EpisodeCard episode={episode} key={episode?.id} />
-                        ))}
-                        {data?.character.episode?.length === 0 && <NoResults />}
-                    </div>
-                </div>
-            )}
-        </SectionLayout>
+                )}
+            </SectionLayout>
         </>
     );
 };
+
 export default CharacterDetail;

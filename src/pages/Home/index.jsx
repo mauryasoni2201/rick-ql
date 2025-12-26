@@ -42,13 +42,14 @@ const Home = () => {
 
     const metaData = {
         title: 'RickQL - Home',
-        description: 'Dive into the Rick and Morty universe with RickQL. Explore detailed character profiles, episode guides, and all the information you need in one place.',
+        description:
+            'Dive into the Rick and Morty universe with RickQL. Explore detailed character profiles, episode guides, and all the information you need in one place.',
         keywords: 'Rick and Morty, RickQL, GraphQL, Rick and Morty API',
-        og:{
+        og: {
             title: 'RickQL - Home',
-            description: 'Dive into the Rick and Morty universe with RickQL. Explore detailed character profiles, episode guides, and all the information you need in one place.',
-            image: '/banner-image.png',
-        }
+            description:
+                'Dive into the Rick and Morty universe with RickQL. Explore detailed character profiles, episode guides, and all the information you need in one place.',
+        },
     };
     return (
         <>
@@ -107,4 +108,5 @@ const Home = () => {
         </>
     );
 };
+
 export default Home;

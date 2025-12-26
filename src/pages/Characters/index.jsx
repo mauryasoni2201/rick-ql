@@ -58,108 +58,108 @@ const Home = () => {
 
     const characters = data?.characters?.results || [];
     const pages = data?.characters?.info?.pages || 0;
-    
-    const metaData ={
+
+    const metaData = {
         title: 'RickQL - Characters',
         description: 'Explore the characters from the Ricky & Morty show',
         keywords: 'Rick and Morty, RickQL, GraphQL, Rick and Morty API',
-        og:{
+        og: {
             title: 'RickQL - Characters',
             description: 'Explore the characters from the Ricky & Morty show',
-            image: '/banner-image.png',
-        }
+        },
     };
-
     return (
         <>
             <CommonHead metaData={metaData} />
-        <SectionLayout
-            headingClasses="text-center pb-10"
-            heading="Ricky & Morty Characters"
-            description="Explore the characters from the Ricky & Morty show"
-            descriptionClasses="text-center pb-30"
-        >
-            <div className="filters-wrapper">
-                <div className="filter-item">
-                    <select
-                        value={status}
-                        onChange={(e) => {
-                            setStatus(e.target.value);
-                            setPage(initialPage);
-                        }}
-                        className="form-select"
-                    >
-                        {selectOptions.status.map((item) => (
-                            <option key={item.value} value={item.value}>
-                                {item.label}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+            <SectionLayout
+                headingClasses="text-center pb-10"
+                heading="Ricky & Morty Characters"
+                description="Explore the characters from the Ricky & Morty show"
+                descriptionClasses="text-center pb-30"
+            >
+                <div className="filters-wrapper">
+                    <div className="filter-item">
+                        <select
+                            value={status}
+                            onChange={(e) => {
+                                setStatus(e.target.value);
+                                setPage(initialPage);
+                            }}
+                            className="form-select"
+                        >
+                            {selectOptions.status.map((item) => (
+                                <option key={item.value} value={item.value}>
+                                    {item.label}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
 
-                <div className="filter-item">
-                    <select
-                        value={gender}
-                        onChange={(e) => {
-                            setGender(e.target.value);
-                            setPage(initialPage);
-                        }}
-                        className="form-select"
-                    >
-                        {selectOptions.gender.map((item) => (
-                            <option key={item.value} value={item.value}>
-                                {item.label}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+                    <div className="filter-item">
+                        <select
+                            value={gender}
+                            onChange={(e) => {
+                                setGender(e.target.value);
+                                setPage(initialPage);
+                            }}
+                            className="form-select"
+                        >
+                            {selectOptions.gender.map((item) => (
+                                <option key={item.value} value={item.value}>
+                                    {item.label}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
 
-                <div className="filter-item">
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Search character..."
-                        value={searchInput}
-                        onChange={(e) => setSearchInput(e.target.value)}
-                    />
-                </div>
-                <div className="w-full py-4 clear-filters">
-                    <button className="btn danger" onClick={resetFilters}>
-                        Reset Filters
-                    </button>
-                </div>
-            </div>
-            <div className="characters-listing">
-                {loading &&
-                    Array.from({ length: 4 }).map((_, i) => (
-                        <div key={i} className="character-card-wrapper">
-                            <Skeleton height={15} count={20} />
-                        </div>
-                    ))}
-
-                {!loading &&
-                    characters.map((character) => (
-                        <CharacterCard
-                            favorites={favorites.includes(character.id)}
-                            toggleFavorite={toggleFavorite}
-                            key={character.id}
-                            character={character}
+                    <div className="filter-item">
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Search character..."
+                            value={searchInput}
+                            onChange={(e) => setSearchInput(e.target.value)}
                         />
-                    ))}
-
-                {!loading && !error && characters.length === 0 && <NoResults />}
-            </div>
-
-            {pages > 1 && (
-                <div className="pagination-wrapper">
-                    <Pagination
-                        pageCount={pages}
-                        onPageChange={handlePageClick}
-                        forcePage={page - 1}
-                    />
+                    </div>
+                    <div className="w-full py-4 clear-filters">
+                        <button className="btn danger" onClick={resetFilters}>
+                            Reset Filters
+                        </button>
+                    </div>
                 </div>
-            )}
-        </SectionLayout>
+                <div className="characters-listing">
+                    {loading &&
+                        Array.from({ length: 4 }).map((_, i) => (
+                            <div key={i} className="character-card-wrapper">
+                                <Skeleton height={15} count={20} />
+                            </div>
+                        ))}
+
+                    {!loading &&
+                        characters.map((character) => (
+                            <CharacterCard
+                                favorites={favorites.includes(character.id)}
+                                toggleFavorite={toggleFavorite}
+                                key={character.id}
+                                character={character}
+                            />
+                        ))}
+
+                    {!loading && !error && characters.length === 0 && (
+                        <NoResults />
+                    )}
+                </div>
+
+                {pages > 1 && (
+                    <div className="pagination-wrapper">
+                        <Pagination
+                            pageCount={pages}
+                            onPageChange={handlePageClick}
+                            forcePage={page - 1}
+                        />
+                    </div>
+                )}
+            </SectionLayout>
         </>
     );
 };

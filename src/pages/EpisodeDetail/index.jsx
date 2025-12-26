@@ -54,48 +54,48 @@ const EpisodeDetail = () => {
         title: 'RickQL - Episode Detail',
         description: 'Explore the details of this episode.',
         keywords: 'Rick and Morty, RickQL, GraphQL, Rick and Morty API',
-        og:{
+        og: {
             title: 'RickQL - Episode Detail',
             description: 'Explore the details of this episode.',
-            image: '/banner-image.png',
-        }
-    }
+        },
+    };
     return (
         <>
-        <CommonHead metaData={metaData}/>
-        <SectionLayout
-            headingClasses="text-center"
-            heading="Episode Details"
-            description="Explore the full information about this episode."
-            descriptionClasses="text-center"
-        >
-            {loading && (
-                <div className="pt-30">
-                    <Skeleton count={30} height={10} />
-                </div>
-            )}
-
-            {!loading && !error && data?.episode && (
-                <>
-                    <InformationCard data={episodeDetails} />
-
-                    <div className="characters-listing pt-30">
-                        <h4 className="text-center w-full py-4 pt-30">
-                            The following characters appeared in this episode.
-                        </h4>
-
-                        {data.episode.characters.map((character) => (
-                            <CharacterCard
-                                key={character.id}
-                                character={character}
-                                favorites={favorites.includes(character.id)}
-                                toggleFavorite={toggleFavorite}
-                            />
-                        ))}
+            <CommonHead metaData={metaData} />
+            <SectionLayout
+                headingClasses="text-center"
+                heading="Episode Details"
+                description="Explore the full information about this episode."
+                descriptionClasses="text-center"
+            >
+                {loading && (
+                    <div className="pt-30">
+                        <Skeleton count={30} height={10} />
                     </div>
-                </>
-            )}
-        </SectionLayout>
+                )}
+
+                {!loading && !error && data?.episode && (
+                    <>
+                        <InformationCard data={episodeDetails} />
+
+                        <div className="characters-listing pt-30">
+                            <h4 className="text-center w-full py-4 pt-30">
+                                The following characters appeared in this
+                                episode.
+                            </h4>
+
+                            {data.episode.characters.map((character) => (
+                                <CharacterCard
+                                    key={character.id}
+                                    character={character}
+                                    favorites={favorites.includes(character.id)}
+                                    toggleFavorite={toggleFavorite}
+                                />
+                            ))}
+                        </div>
+                    </>
+                )}
+            </SectionLayout>
         </>
     );
 };

@@ -13,7 +13,10 @@ const CommonHead = ({ metaData }) => {
 
             <meta property="og:title" content={metaData.og.title} />
             <meta property="og:description" content={metaData.og.description} />
-            <meta property="og:image" content={metaData.og.image} />
+            <meta
+                property="og:image"
+                content="https://rickql-ms.vercel.app/banner-image.png"
+            />
             <meta property="og:url" content={currentUrl} />
         </>
     );

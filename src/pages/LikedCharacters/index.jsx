@@ -67,54 +67,56 @@ const LikedCharacters = () => {
 
     const metaData = {
         title: 'RickQL - Liked Characters',
-        description: 'Your favorite characters from the Rick and Morty universe',
+        description:
+            'Your favorite characters from the Rick and Morty universe',
         keywords: 'Rick and Morty, RickQL, GraphQL, Rick and Morty API',
-        og:{
+        og: {
             title: 'RickQL - Liked Characters',
-            description: 'Your favorite characters from the Rick and Morty universe',
-            image: '/banner-image.png',
-        }
+            description:
+                'Your favorite characters from the Rick and Morty universe',
+        },
     };
+
     return (
         <>
             <CommonHead metaData={metaData} />
-        <SectionLayout
-            heading="Liked Characters"
-            headingClasses="text-center pb-10"
-            description="Your favorite characters from the Rick and Morty universe"
-            descriptionClasses="text-center pb-30"
-        >
-            <div className="characters-listing">
-                {loading && <FullPageLoader />}
+            <SectionLayout
+                heading="Liked Characters"
+                headingClasses="text-center pb-10"
+                description="Your favorite characters from the Rick and Morty universe"
+                descriptionClasses="text-center pb-30"
+            >
+                <div className="characters-listing">
+                    {loading && <FullPageLoader />}
 
-                {!loading &&
-                    characters.map((character) => (
-                        <CharacterCard
-                            key={character.id}
-                            character={character}
-                            favorites={favorites.includes(character.id)}
-                            removeFavorite
-                            handleRemoveFavorite={(e) =>
-                                handleRemoveFavorite(e, character)
-                            }
-                        />
-                    ))}
+                    {!loading &&
+                        characters.map((character) => (
+                            <CharacterCard
+                                key={character.id}
+                                character={character}
+                                favorites={favorites.includes(character.id)}
+                                removeFavorite
+                                handleRemoveFavorite={(e) =>
+                                    handleRemoveFavorite(e, character)
+                                }
+                            />
+                        ))}
 
-                {!loading && !error && !hasFavorites && (
-                    <NoResults text="No liked characters found." />
-                )}
-            </div>
-
-            {pages > 1 && (
-                <div className="pagination-wrapper">
-                    <Pagination
-                        pageCount={pages}
-                        onPageChange={handlePageClick}
-                        forcePage={page - 1}
-                    />
+                    {!loading && !error && !hasFavorites && (
+                        <NoResults text="No liked characters found." />
+                    )}
                 </div>
-            )}
-        </SectionLayout>
+
+                {pages > 1 && (
+                    <div className="pagination-wrapper">
+                        <Pagination
+                            pageCount={pages}
+                            onPageChange={handlePageClick}
+                            forcePage={page - 1}
+                        />
+                    </div>
+                )}
+            </SectionLayout>
         </>
     );
 };

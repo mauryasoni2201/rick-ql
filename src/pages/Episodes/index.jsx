@@ -44,59 +44,61 @@ const Episodes = () => {
         title: 'RickQL - Episodes',
         description: 'Explore the episodes from the Ricky & Morty show',
         keywords: 'Rick and Morty, RickQL, GraphQL, Rick and Morty API',
-        og:{
+        og: {
             title: 'RickQL - Episodes',
             description: 'Explore the episodes from the Ricky & Morty show',
-            image: '/banner-image.png',
-        }
-    }
+        },
+    };
 
     return (
         <>
-        <CommonHead metaData={metaData}/>
-        <SectionLayout
-            headingClasses="text-center pb-10"
-            heading="Ricky & Morty Episodes"
-            description="Explore the episodes from the Ricky & Morty show"
-            descriptionClasses="text-center pb-30"
-        >
-            <div className="filters-wrapper episodes">
-                <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Search episode..."
-                    value={searchInput}
-                    onChange={(e) => setSearchInput(e.target.value)}
-                />
-            </div>
-
-            <div className="episodes-listing">
-                {loading &&
-                    Array.from({ length: 4 }).map((_, i) => (
-                        <div key={i} className="episodes-card-wrapper">
-                            <Skeleton count={6} height={12} />
-                        </div>
-                    ))}
-
-                {!loading &&
-                    episodes.map((episode) => (
-                        <EpisodeCard episode={episode} key={episode?.id} />
-                    ))}
-
-                {!loading && !error && episodes.length === 0 && <NoResults />}
-            </div>
-
-            {pages > 1 && (
-                <div className="pagination-wrapper">
-                    <Pagination
-                        pageCount={pages}
-                        onPageChange={handlePageClick}
-                        forcePage={page - 1}
+            <CommonHead metaData={metaData} />
+            <SectionLayout
+                headingClasses="text-center pb-10"
+                heading="Ricky & Morty Episodes"
+                description="Explore the episodes from the Ricky & Morty show"
+                descriptionClasses="text-center pb-30"
+            >
+                <div className="filters-wrapper episodes">
+                    <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Search episode..."
+                        value={searchInput}
+                        onChange={(e) => setSearchInput(e.target.value)}
                     />
                 </div>
-            )}
-        </SectionLayout>
+
+                <div className="episodes-listing">
+                    {loading &&
+                        Array.from({ length: 4 }).map((_, i) => (
+                            <div key={i} className="episodes-card-wrapper">
+                                <Skeleton count={6} height={12} />
+                            </div>
+                        ))}
+
+                    {!loading &&
+                        episodes.map((episode) => (
+                            <EpisodeCard episode={episode} key={episode?.id} />
+                        ))}
+
+                    {!loading && !error && episodes.length === 0 && (
+                        <NoResults />
+                    )}
+                </div>
+
+                {pages > 1 && (
+                    <div className="pagination-wrapper">
+                        <Pagination
+                            pageCount={pages}
+                            onPageChange={handlePageClick}
+                            forcePage={page - 1}
+                        />
+                    </div>
+                )}
+            </SectionLayout>
         </>
     );
 };
+
 export default Episodes;

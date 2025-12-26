@@ -52,54 +52,54 @@ const LocationDetailPage = () => {
         title: 'RickQL - Location Detail',
         description: 'Explore the details of this location.',
         keywords: 'Rick and Morty, RickQL, GraphQL, Rick and Morty API',
-        og:{
+        og: {
             title: 'RickQL - Location Detail',
             description: 'Explore the details of this location.',
-            image: '/banner-image.png',
-        }
-    }
+        },
+    };
+
     return (
         <>
-        <CommonHead metaData={metaData}/>
-        <SectionLayout
-            heading="Location Detail"
-            headingClasses="text-center pb-10"
-            description="Explore the details of this location."
-            descriptionClasses="text-center"
-        >
-            {loading && (
-                <div className="pt-30">
-                    <Skeleton count={30} height={10} />
-                </div>
-            )}
-
-            {!loading && !error && data?.location && (
-                <>
-                    <InformationCard data={locationDetails} />
-
-                    <div className="characters-listing pt-30">
-                        <h4 className="text-center w-full py-4 pt-30">
-                            The following characters were last seen at this
-                            location.
-                        </h4>
-
-                        {data.location.residents.map((character) => (
-                            <CharacterCard
-                                key={character.id}
-                                character={character}
-                                favorites={favorites.includes(character.id)}
-                                toggleFavorite={toggleFavorite}
-                            />
-                        ))}
-                        {!loading &&
-                            !error &&
-                            data.location.residents.length === 0 && (
-                                <NoResults />
-                            )}
+            <CommonHead metaData={metaData} />
+            <SectionLayout
+                heading="Location Detail"
+                headingClasses="text-center pb-10"
+                description="Explore the details of this location."
+                descriptionClasses="text-center"
+            >
+                {loading && (
+                    <div className="pt-30">
+                        <Skeleton count={30} height={10} />
                     </div>
-                </>
-            )}
-        </SectionLayout>
+                )}
+
+                {!loading && !error && data?.location && (
+                    <>
+                        <InformationCard data={locationDetails} />
+
+                        <div className="characters-listing pt-30">
+                            <h4 className="text-center w-full py-4 pt-30">
+                                The following characters were last seen at this
+                                location.
+                            </h4>
+
+                            {data.location.residents.map((character) => (
+                                <CharacterCard
+                                    key={character.id}
+                                    character={character}
+                                    favorites={favorites.includes(character.id)}
+                                    toggleFavorite={toggleFavorite}
+                                />
+                            ))}
+                            {!loading &&
+                                !error &&
+                                data.location.residents.length === 0 && (
+                                    <NoResults />
+                                )}
+                        </div>
+                    </>
+                )}
+            </SectionLayout>
         </>
     );
 };
