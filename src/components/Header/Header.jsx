@@ -7,14 +7,17 @@ const Header = () => {
 
     const handleNavClick = () => {
         window.scrollTo(0, 0);
+        document.body.classList.remove('no-scroll');
         setOpen(false);
     };
 
     const handleOpenButton = () => {
+        document.body.classList.add('no-scroll');
         setOpen(true);
     };
 
     const handleCloseButton = () => {
+        document.body.classList.remove('no-scroll');
         setOpen(false);
     };
 
@@ -142,5 +145,4 @@ const Header = () => {
         </div>
     );
 };
-
 export default Header;

@@ -76,7 +76,7 @@
         max-width: 300px;
         height: 100dvh;
         padding: 40px 20px;
-        background-color: var(--secondary-color);
+        background-color: #1a3a6f;
         overflow-y: auto;
         z-index: 13;
     }

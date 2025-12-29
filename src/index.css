@@ -810,3 +810,6 @@ div.m-0 {
 .footer-content p.footer-text a:hover {
     color: var(--primary-color);
 }
+.no-scroll {
+    overflow: hidden;
+}
